@@ -1,0 +1,7 @@
+plugins:
+  composer_template_enabled:
+    default: true
+    client: true
+  composer_template_category:
+    default: ""
+    type: "category"

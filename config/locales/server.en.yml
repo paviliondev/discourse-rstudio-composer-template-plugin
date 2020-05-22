@@ -1,0 +1,4 @@
+en:
+  site_settings:
+    composer_template_enabled: "Enable composer template for articles?"
+    composer_template_category: "Article category"
