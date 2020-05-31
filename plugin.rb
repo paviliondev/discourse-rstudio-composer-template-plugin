@@ -1,8 +1,13 @@
 # name: composer-template
-# version: 0.1.0
+# version: 0.1.1
 # author: Muhlis Cahyono (muhlisbc@gmail.com)
+# url: https://github.com/paviliondev/discourse-rstudio-composer-template-plugin
 
 enabled_site_setting :composer_template_enabled
+
+%i[common desktop mobile].each do |type|
+  register_asset "stylesheets/rstudio-composer-template/#{type}.scss", type
+end
 
 after_initialize do
   module ::ComposerTemplate
