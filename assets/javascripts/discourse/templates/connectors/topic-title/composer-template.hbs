@@ -1,0 +1,24 @@
+{{#if model.category.rstudio_topic_previews_enabled}}
+  {{d-section pageClass="rstudio-topic-article"}}
+
+  <div class="rstudio-tl-item force-show">
+    {{#if model.new_topic_form_data.description}}
+      <div class="rstudio-tl-description">
+        {{model.new_topic_form_data.description}}
+      </div>
+    {{/if}}
+
+    {{raw "rstudio/tl-info"
+      username=model.details.created_by.username
+      createdAt=context.topic.created_at
+    }}
+
+    {{#if model.new_topic_form_data.authors}}
+      <div class="rstudio-tl-authors">
+        {{model.new_topic_form_data.authors}}
+      </div>
+    {{/if}}
+
+    {{topic-category topic=model class="topic-category"}}
+  </div>
+{{/if}}

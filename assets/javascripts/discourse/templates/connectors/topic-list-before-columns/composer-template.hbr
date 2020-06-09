@@ -1,0 +1,44 @@
+{{#if context.categoryCtrl.category.rstudio_topic_previews_enabled}}
+  <div class="rstudio-tl-item">
+    <div class="rstudio-tl-left main-link">
+      {{topic-link context.topic class="rstudio-tl-title raw-link raw-topic-link"}}
+
+      {{#if context.site.mobileView}}
+        {{raw "rstudio/tl-thumbnail" topic=context.topic}}
+
+        {{raw "rstudio/tl-info"
+          username=context.topic.op_username
+          createdAt=context.topic.created_at
+        }}
+      {{/if}}
+
+      {{#if context.topic.new_topic_form_data.description}}
+        <div class="rstudio-tl-description">
+          {{context.topic.new_topic_form_data.description}}
+        </div>
+      {{/if}}
+
+      {{#if context.topic.new_topic_form_data.authors}}
+        <div class="rstudio-tl-authors">
+          {{context.topic.new_topic_form_data.authors}}
+        </div>
+      {{/if}}
+
+      <div class="rstudio-tl-category-and-tags link-bottom-line">
+        {{category-link context.topic.category}}
+        {{discourse-tags context.topic mode="list" tagsForUser=context.tagsForUser}}
+      </div>
+    </div>
+
+    {{#unless context.site.mobileView}}
+      <div class="rstudio-tl-right">
+        {{raw "rstudio/tl-info"
+          username=context.topic.op_username
+          createdAt=context.topic.created_at
+        }}
+
+        {{raw "rstudio/tl-thumbnail" topic=context.topic}}
+      </div>
+    {{/unless}}
+  </div>
+{{/if}}

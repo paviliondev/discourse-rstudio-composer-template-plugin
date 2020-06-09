@@ -1,0 +1,66 @@
+.new-topic-form-composer-page {
+  #reply-control {
+    .wmd-controls {
+      height: auto;
+
+      .d-editor-textarea-wrapper {
+        display: flex;
+      }
+    }
+
+    .submit-panel a.mobile-file-upload {
+      display: inline-flex;
+    }
+
+    .composer-fields {
+      flex-grow: unset;
+      overflow-y: unset;
+      overflow-x: unset;
+    }
+  }
+
+  .new-topic-form {
+    margin-top: 5px;
+
+    .ntf-form-field {
+      margin-bottom: 5px;
+    }
+  }
+
+  .mini-tag-chooser {
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+.rstudio-tl-item {
+  .rstudio-tl-thumbnail {
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    margin-bottom: 10px;
+  }
+
+  .rstudio-tl-info {
+    font-size: 0.85em;
+    margin-bottom: 10px;
+  }
+
+  .rstudio-tl-description {
+    font-size: 0.85em;
+  }
+
+  .rstudio-tl-authors {
+    font-size: 0.9em;
+  }
+}
+
+.rstudio-topic-previews-page {
+  .topic-list {
+    td > div:not(.rstudio-tl-item) {
+      display: none;
+    }
+  }
+}

@@ -1,5 +1,142 @@
-.new-topic-form-composer-page #reply-control .category-input {
-  li[data-name='Uncategorized'] {
+.new-topic-form-composer-page {
+  #reply-control .category-input {
+    li[data-name='Uncategorized'] {
+      display: none;
+    }
+  }
+
+  .new-topic-form {
+    margin-top: -5px;
+
+    .ntf-form-field {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.rstudio-tl-item {
+  padding: 15px 0;
+  display: none;
+
+  &.force-show {
+    display: block;
+  }
+
+  .rstudio-tl-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rstudio-tl-right {
+    width: 33%;
+    margin-left: 25px;
+  }
+
+  .rstudio-tl-category-and-tags {
+    margin-top: auto;
+  }
+
+  .rstudio-tl-description {
+    color: $primary-high;
+    font-size: .9em;
+    margin-bottom: 15px;
+    text-align: justify;
+  }
+
+  .rstudio-tl-authors {
+    color: $primary-very-high;
+    font-size: .95em;
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+
+  .rstudio-tl-info {
+    color: $primary-medium;
+    text-align: right;
+  }
+
+  .rstudio-tl-info-sep {
+    color: $primary-very-high;
+    text-align: right;
+  }
+
+  .rstudio-tl-thumbnail {
+    background-color: $primary;
+    display: block;
+    opacity: 0.95;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.rstudio-topic-previews-page {
+  .rstudio-tl-item {
+    display: flex;
+    border-bottom: 1px solid $primary-low;
+
+    a.rstudio-tl-title {
+      color: $primary;
+
+      &:visited {
+        color: $primary;
+      }
+
+      &:hover {
+        color: $primary-high;
+      }
+    }
+  }
+
+  .topic-list {
+    .topic-list-item-separator {
+      display: none;
+    }
+
+    tr {
+      border-bottom: none;
+    }
+  }
+}
+
+.rstudio-news-category-link {
+  list-style: none;
+  padding: 6px 12px;
+
+  a {
+    color: $primary-high;
+    font-size: 1.4em;
+
+    &:visited {
+      color: $primary-high;
+    }
+
+    &:hover {
+      color: $primary-very-high;
+    }
+  }
+}
+
+.rstudio-topic-article-page {
+  .title-wrapper .topic-category {
+    display: none;
+  }
+
+  .rstudio-tl-item {
+    max-width: 750px;
+    padding-bottom: 0;
+
+    .rstudio-tl-info {
+      text-align: left;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.rstudio-topic-article-editing-page {
+  .rstudio-tl-item {
     display: none;
   }
 }

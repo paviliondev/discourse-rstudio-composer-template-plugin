@@ -1,0 +1,66 @@
+.new-topic-form-composer-page {
+  #reply-control {
+    min-height: 50vh;
+
+    .wmd-controls {
+      height: auto;
+      width: 100%;
+      margin-top: -17px;
+
+      .d-editor-textarea-wrapper {
+        display: flex;
+      }
+    }
+
+    .composer-fields {
+      flex-grow: unset;
+    }
+
+    .composer-fields-outlet.announcements-composer {
+      margin-bottom: 15px;
+    }
+
+    &.show-preview {
+      .wmd-controls {
+        width: 50%;
+      }
+    }
+  }
+}
+
+.rstudio-tl-item {
+  .rstudio-tl-thumbnail {
+    margin-top: 10px;
+    margin-left: auto;
+    max-width: 75%;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.rstudio-topic-previews-page {
+  .topic-list {
+    thead {
+      display: none;
+    }
+
+    td {
+      display: none;
+    }
+
+    tr {
+      border-bottom: none;
+    }
+  }
+}
+
+.rstudio-topic-article-page {
+  .rstudio-tl-item {
+    .rstudio-tl-description {
+      font-size: .95em;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+<div class="rstudio-tl-info">
+  {{username}}
+  <span class="rstudio-tl-info-sep">|</span>
+  Posted Date: {{rstudio-topic-date createdAt}}
+</div>

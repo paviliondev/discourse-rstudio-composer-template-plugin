@@ -17,7 +17,7 @@ after_initialize do
           'id' => 'description',
           'type' => 'text',
           'placeholder' => 'Description: Short summary of your article. Max 300 char.',
-          'regexp' => '.{0,300}'
+          'regexp' => '^.{0,300}$'
         },
         {
           'id' => 'authors',
@@ -28,11 +28,6 @@ after_initialize do
           'id' => 'url',
           'type' => 'text',
           'placeholder' => 'URL. If report, cite original article'
-        },
-        {
-          'id' => 'article_text',
-          'type' => 'textarea',
-          'required' => true
         }
       ]
     end
@@ -89,4 +84,32 @@ after_initialize do
   end
 
   ComposerTemplate.create_form
+
+  add_to_class(:category, :rstudio_topic_previews_enabled?) do
+    new_topic_form_enabled? && SiteSetting.composer_template_enabled
+  end
+
+  TopicList.preloaded_custom_fields << 'new_topic_form_data'
+
+  add_to_serializer(:topic_list_item, :new_topic_form_data) {
+    return unless object.category&.rstudio_topic_previews_enabled?
+
+    object.custom_fields['new_topic_form_data']
+  }
+
+  add_to_serializer(:topic_list_item, :op_username) {
+    object.user&.username
+  }
+
+  add_to_serializer(:basic_category, :rstudio_topic_previews_enabled?) {
+    object.rstudio_topic_previews_enabled?
+  }
+
+  add_to_serializer(:topic_view, :rstudio_article_url_onebox) {
+    article_url = new_topic_form_data&.dig('url')
+
+    if article_url
+      Oneboxer.preview(article_url)
+    end
+  }
 end

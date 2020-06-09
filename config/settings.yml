@@ -5,3 +5,4 @@ plugins:
   composer_template_category:
     default: ""
     type: "category"
+    client: true

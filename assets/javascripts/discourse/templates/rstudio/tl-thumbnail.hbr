@@ -1,0 +1,5 @@
+{{#if topic.image_url}}
+  <a href={{rstudio-topic-url topic}} class="rstudio-tl-thumbnail">
+    <img src={{topic.image_url}} alt={{topic.title}} />
+  </a>
+{{/if}}
