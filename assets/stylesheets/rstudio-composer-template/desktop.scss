@@ -41,7 +41,7 @@
   }
 }
 
-.rstudio-topic-previews-page {
+.rstudio-topic-previews-page:not(.navigation-categories) {
   .topic-list {
     thead {
       display: none;

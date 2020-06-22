@@ -72,7 +72,7 @@
   }
 }
 
-.rstudio-topic-previews-page {
+.rstudio-topic-previews-page:not(.navigation-categories) {
   .rstudio-tl-item {
     display: flex;
     border-bottom: 1px solid $primary-low;
