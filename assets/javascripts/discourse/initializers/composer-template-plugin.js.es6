@@ -17,6 +17,27 @@ function initWithApi(api) {
 
     ntfCreateReply() {
       return;
+    },
+
+    ntfOriginalValidation() {
+      if (this.disableSubmit) return;
+
+      if (!this.showWarning) {
+       this.set("model.isWarning", false);
+      }
+
+      if (this.model.cantSubmitPost) {
+       this.set("lastValidatedAt", Date.now());
+       return;
+      }
+    },
+
+    save(force) {
+      if (this.get("model.showFields")) {
+        this.ntfOriginalValidation();
+      }
+
+      this._super(...arguments);
     }
   });
 
