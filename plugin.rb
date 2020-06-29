@@ -1,5 +1,5 @@
 # name: composer-template
-# version: 0.1.3
+# version: 0.1.4
 # author: Muhlis Cahyono (muhlisbc@gmail.com)
 # url: https://github.com/paviliondev/discourse-rstudio-composer-template-plugin
 
@@ -81,6 +81,10 @@ after_initialize do
     if site_setting == :composer_template_category
       ComposerTemplate.create_form
     end
+  end
+
+  on(:category_created) do |_category|
+    ComposerTemplate.create_form
   end
 
   ComposerTemplate.create_form

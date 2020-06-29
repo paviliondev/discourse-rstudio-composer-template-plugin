@@ -140,3 +140,9 @@
     display: none;
   }
 }
+
+.admin-interface {
+  li a[href='/admin/plugins/new-topic-form'] {
+    display: none;
+  }
+}
