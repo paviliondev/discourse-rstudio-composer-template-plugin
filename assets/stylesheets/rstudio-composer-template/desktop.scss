@@ -14,6 +14,8 @@
 
     .composer-fields {
       flex-grow: unset;
+      overflow-y: unset;
+      overflow-x: unset;
     }
 
     .composer-fields-outlet.announcements-composer {

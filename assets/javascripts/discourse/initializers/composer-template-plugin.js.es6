@@ -62,7 +62,7 @@ function initWithApi(api) {
     const model = dec.getModel();
 
     if (!model.firstPost) return;
-    if (!model.topic.category.rstudio_topic_previews_enabled) return;
+    if (!model.topic.get("category.rstudio_topic_previews_enabled")) return;
 
     const onebox = model.topic.rstudio_article_url_onebox;
 

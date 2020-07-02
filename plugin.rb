@@ -1,5 +1,5 @@
 # name: composer-template
-# version: 0.1.4
+# version: 0.1.5
 # author: Muhlis Cahyono (muhlisbc@gmail.com)
 # url: https://github.com/paviliondev/discourse-rstudio-composer-template-plugin
 
