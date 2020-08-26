@@ -1,5 +1,5 @@
 # name: composer-template
-# version: 0.1.5
+# version: 0.1.6
 # author: Muhlis Cahyono (muhlisbc@gmail.com)
 # url: https://github.com/paviliondev/discourse-rstudio-composer-template-plugin
 
@@ -74,6 +74,32 @@ after_initialize do
       return smr if desc.blank?
 
       desc
+    end
+
+    def article_url
+      return unless SiteSetting.composer_template_enabled
+
+      category = @topic.category
+
+      return unless category.present?
+      return unless category.new_topic_form_enabled?
+
+      @topic.custom_fields.dig('new_topic_form_data', 'url')
+    end
+  end
+
+  module ::ApplicationHelper
+    alias_method :orig_crawlable_meta_data, :crawlable_meta_data
+
+    def crawlable_meta_data(opts = nil)
+      opts ||= {}
+
+      if opts[:article_url]
+        opts[:url] = opts[:article_url]
+        opts[:ignore_canonical] = false
+      end
+
+      orig_crawlable_meta_data(opts)
     end
   end
 

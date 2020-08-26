@@ -48,7 +48,7 @@
     color: $primary-very-high;
     font-size: .95em;
     margin-bottom: 10px;
-    text-decoration: underline;
+    // text-decoration: underline;
   }
 
   .rstudio-tl-info {
@@ -79,6 +79,7 @@
 
     a.rstudio-tl-title {
       color: $primary;
+      font-weight: bold;
 
       &:visited {
         color: $primary;
