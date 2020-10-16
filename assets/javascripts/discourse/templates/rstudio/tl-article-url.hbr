@@ -1,0 +1,6 @@
+{{#if host}}
+  <a href={{url}} target="_blank" class="rstudio-tl-url" title={{url}}>
+    {{d-icon "external-link-alt"}}
+    {{host}}
+  </a>
+{{/if}}

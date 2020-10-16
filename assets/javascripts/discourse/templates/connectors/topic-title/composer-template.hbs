@@ -9,16 +9,13 @@
     {{/if}}
 
     {{raw "rstudio/tl-info"
+      authors=model.new_topic_form_data.authors
       username=model.details.created_by.username
       createdAt=model.created_at
     }}
 
-    {{#if model.new_topic_form_data.authors}}
-      <div class="rstudio-tl-authors">
-        {{model.new_topic_form_data.authors}}
-      </div>
-    {{/if}}
-
-    {{topic-category topic=model class="topic-category"}}
+    {{raw "rstudio/tl-category-tags"
+      topic=model
+    }}
   </div>
 {{/if}}

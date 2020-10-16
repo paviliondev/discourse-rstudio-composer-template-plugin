@@ -1,0 +1,9 @@
+<div class="topic-category">
+  {{category-link topic.category}}
+  {{discourse-tags topic mode="list"}}
+
+  {{raw "rstudio/tl-article-url"
+    url=topic.new_topic_form_data.url
+    host=topic.article_url_host
+  }}
+</div>

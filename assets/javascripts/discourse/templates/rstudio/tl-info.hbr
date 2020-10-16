@@ -1,5 +1,11 @@
 <div class="rstudio-tl-info">
-  {{username}}
-  <span class="rstudio-tl-info-sep">|</span>
-  Posted Date: {{rstudio-topic-date createdAt}}
+  {{#if authors}}
+    <div class="rstudio-tl-authors">
+      {{authors}}
+    </div>
+  {{/if}}
+
+  <div class="rstudio-tl-posted">
+    Posted {{rstudio-topic-date createdAt}} by {{username}}
+  </div>
 </div>

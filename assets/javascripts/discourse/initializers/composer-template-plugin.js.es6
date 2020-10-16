@@ -8,7 +8,12 @@ function initWithApi(api) {
   if (!Discourse.SiteSettings.composer_template_enabled) return;
 
   api.modifyClass("controller:composer", {
-    @discourseComputed("model.action", "isWhispering", "model.editConflict", "model.showFields")
+    @discourseComputed(
+      "model.action",
+      "isWhispering",
+      "model.editConflict",
+      "model.showFields"
+    )
     saveLabel(modelAction, isWhispering, editConflict, showFields) {
       if (!showFields) return this._super(...arguments);
 
@@ -23,12 +28,12 @@ function initWithApi(api) {
       if (this.disableSubmit) return;
 
       if (!this.showWarning) {
-       this.set("model.isWarning", false);
+        this.set("model.isWarning", false);
       }
 
       if (this.model.cantSubmitPost) {
-       this.set("lastValidatedAt", Date.now());
-       return;
+        this.set("lastValidatedAt", Date.now());
+        return;
       }
     },
 
@@ -42,7 +47,7 @@ function initWithApi(api) {
   });
 
   api.modifyClass("component:topic-list-item", {
-    categoryCtrl: inject("navigation/category"),
+    categoryCtrl: inject("navigation/category")
   });
 
   api.decorateWidget("header-icons:before", dec => {
@@ -51,9 +56,13 @@ function initWithApi(api) {
 
     if (!category) return;
 
-    const link = dec.h("a", {
-      href: getURL(`/c/${Category.slugFor(category)}/${category.get("id")}`)
-    }, "News");
+    const link = dec.h(
+      "a",
+      {
+        href: getURL(`/c/${Category.slugFor(category)}/${category.get("id")}`)
+      },
+      "News"
+    );
 
     return dec.h("li.rstudio-news-category-link", link);
   });
