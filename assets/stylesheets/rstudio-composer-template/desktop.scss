@@ -36,14 +36,18 @@
 
 .rstudio-tl-item {
   .rstudio-tl-thumbnail {
-    margin-top: 10px;
-    margin-left: auto;
-    max-width: 75%;
-
     img {
       width: 100%;
       height: auto;
     }
+  }
+
+  .rstudio-tl-title, .rstudio-tl-description {
+    max-width: 650px;
+  }
+
+  .rstudio-tl-title {
+    font-size: 1.6em;
   }
 }
 

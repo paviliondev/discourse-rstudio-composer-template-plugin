@@ -1,5 +1,5 @@
 # name: composer-template
-# version: 0.1.6
+# version: 0.1.7
 # author: Muhlis Cahyono (muhlisbc@gmail.com)
 # url: https://github.com/paviliondev/discourse-rstudio-composer-template-plugin
 
@@ -46,6 +46,9 @@ after_initialize do
         topic_form.form['fields'] = fields
 
         topic_form.save
+
+        c.sort_order = 'created'
+        c.save!
       end
 
       create_form_for.call(category)
@@ -131,6 +134,16 @@ after_initialize do
     object.user&.username
   }
 
+  %i[topic_list_item topic_view].each do |s|
+    add_to_serializer(s, :article_url_host) {
+      article_url = new_topic_form_data&.dig('url')
+
+      if article_url
+        URI(article_url).host
+      end
+    }
+  end
+
   add_to_serializer(:basic_category, :rstudio_topic_previews_enabled?) {
     object.rstudio_topic_previews_enabled?
   }
@@ -142,4 +155,6 @@ after_initialize do
       Oneboxer.preview(article_url)
     end
   }
+
+  register_svg_icon 'external-link-alt'
 end

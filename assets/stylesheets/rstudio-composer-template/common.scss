@@ -29,7 +29,7 @@
   }
 
   .rstudio-tl-right {
-    width: 33%;
+    width: 25%;
     margin-left: 25px;
   }
 
@@ -37,23 +37,47 @@
     margin-top: auto;
   }
 
+  .topic-category .discourse-tags {
+    display: block;
+    margin-right: 5px;
+  }
+
+  .topic-category {
+    font-size: .85em;
+
+    > * {
+      margin-bottom: 5px;
+    }
+  }
+
   .rstudio-tl-description {
     color: $primary-high;
     font-size: 0.9em;
     margin-bottom: 15px;
     text-align: justify;
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  a.rstudio-tl-description:hover {
+    color: $primary-very-high;
   }
 
   .rstudio-tl-authors {
     color: $primary-very-high;
-    font-size: 0.95em;
-    margin-bottom: 10px;
-    // text-decoration: underline;
+    margin-right: 10px;
+  }
+
+  .rstudio-tl-posted {
+    font-size: .9em;
   }
 
   .rstudio-tl-info {
     color: $primary-medium;
-    text-align: right;
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 1em;
+    font-size: .85em;
+    flex-wrap: wrap;
   }
 
   .rstudio-tl-info-sep {
@@ -65,10 +89,26 @@
     background-color: $primary;
     display: block;
     opacity: 0.95;
+    border: 1px solid $primary-low;
 
     &:hover {
       opacity: 1;
     }
+  }
+
+  .rstudio-tl-url {
+    color: $primary-high;
+    font-size: .9em;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .rstudio-tl-title {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    padding-top: 0;
   }
 }
 
@@ -79,14 +119,14 @@
 
     a.rstudio-tl-title {
       color: $primary;
-      font-weight: bold;
+      padding-top: 0;
 
       &:visited {
         color: $primary;
       }
 
       &:hover {
-        color: $primary-high;
+        color: $primary-very-high;
       }
     }
   }
@@ -128,6 +168,7 @@
   .rstudio-tl-item {
     max-width: 750px;
     padding-bottom: 0;
+    padding-top: .5em;
 
     .rstudio-tl-info {
       text-align: left;
@@ -146,4 +187,17 @@
   li a[href="/admin/plugins/new-topic-form"] {
     display: none;
   }
+}
+
+h1.rstudio-news-banner {
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
+  font-weight: 600;
+  font-size: 3em;
+  margin: 0;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  border: 1px solid $primary-low;
+  border-radius: 5px;
+  background-color: $primary-very-low;
 }

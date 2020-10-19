@@ -5,38 +5,29 @@
 
       {{#if context.site.mobileView}}
         {{raw "rstudio/tl-thumbnail" topic=context.topic}}
-
-        {{raw "rstudio/tl-info"
-          username=context.topic.op_username
-          createdAt=context.topic.created_at
-        }}
       {{/if}}
 
       {{#if context.topic.new_topic_form_data.description}}
-        <div class="rstudio-tl-description">
+        <a class="rstudio-tl-description raw-topic-link" href={{rstudio-topic-url context.topic}}>
           {{context.topic.new_topic_form_data.description}}
-        </div>
+        </a>
       {{/if}}
 
-      {{#if context.topic.new_topic_form_data.authors}}
-        <div class="rstudio-tl-authors">
-          {{context.topic.new_topic_form_data.authors}}
-        </div>
-      {{/if}}
+      <div class="rstudio-tl-category-and-tags">
+        {{raw "rstudio/tl-info"
+          authors=context.topic.new_topic_form_data.authors
+          username=context.topic.op_username
+          createdAt=context.topic.created_at
+        }}
 
-      <div class="rstudio-tl-category-and-tags link-bottom-line">
-        {{category-link context.topic.category}}
-        {{discourse-tags context.topic mode="list" tagsForUser=context.tagsForUser}}
+        {{raw "rstudio/tl-category-tags"
+          topic=context.topic
+        }}
       </div>
     </div>
 
     {{#unless context.site.mobileView}}
       <div class="rstudio-tl-right">
-        {{raw "rstudio/tl-info"
-          username=context.topic.op_username
-          createdAt=context.topic.created_at
-        }}
-
         {{raw "rstudio/tl-thumbnail" topic=context.topic}}
       </div>
     {{/unless}}

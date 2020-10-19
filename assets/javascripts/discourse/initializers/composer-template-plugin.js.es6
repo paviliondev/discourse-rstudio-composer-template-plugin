@@ -48,7 +48,7 @@ function initWithApi(api) {
   });
 
   api.modifyClass("component:topic-list-item", {
-    categoryCtrl: inject("navigation/category"),
+    categoryCtrl: inject("navigation/category")
   });
 
   api.decorateWidget("header-icons:before", (dec) => {
@@ -60,7 +60,7 @@ function initWithApi(api) {
     const link = dec.h(
       "a",
       {
-        href: getURL(`/c/${Category.slugFor(category)}/${category.get("id")}`),
+        href: getURL(`/c/${Category.slugFor(category)}/${category.get("id")}`)
       },
       "News"
     );
