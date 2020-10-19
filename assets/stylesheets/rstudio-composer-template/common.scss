@@ -1,6 +1,6 @@
 .new-topic-form-composer-page {
   #reply-control .category-input {
-    li[data-name='Uncategorized'] {
+    li[data-name="Uncategorized"] {
       display: none;
     }
   }
@@ -39,14 +39,14 @@
 
   .rstudio-tl-description {
     color: $primary-high;
-    font-size: .9em;
+    font-size: 0.9em;
     margin-bottom: 15px;
     text-align: justify;
   }
 
   .rstudio-tl-authors {
     color: $primary-very-high;
-    font-size: .95em;
+    font-size: 0.95em;
     margin-bottom: 10px;
     // text-decoration: underline;
   }
@@ -143,7 +143,7 @@
 }
 
 .admin-interface {
-  li a[href='/admin/plugins/new-topic-form'] {
+  li a[href="/admin/plugins/new-topic-form"] {
     display: none;
   }
 }
