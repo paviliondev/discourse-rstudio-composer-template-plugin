@@ -1,5 +1,5 @@
 # name: composer-template
-# version: 0.1.7
+# version: 0.1.8
 # author: Muhlis Cahyono (muhlisbc@gmail.com)
 # url: https://github.com/paviliondev/discourse-rstudio-composer-template-plugin
 
@@ -8,6 +8,9 @@ enabled_site_setting :composer_template_enabled
 %i[common desktop mobile].each do |type|
   register_asset "stylesheets/rstudio-composer-template/#{type}.scss", type
 end
+
+Discourse.filters.push :created
+Discourse.anonymous_filters.push :created
 
 after_initialize do
   module ::ComposerTemplate
@@ -47,8 +50,8 @@ after_initialize do
 
         topic_form.save
 
-        c.sort_order = 'created'
-        c.save!
+        # c.sort_order = 'created'
+        # c.save!
       end
 
       create_form_for.call(category)
@@ -157,4 +160,13 @@ after_initialize do
   }
 
   register_svg_icon 'external-link-alt'
+
+  require_dependency 'topic_query'
+  class ::TopicQuery
+    def list_created
+      create_list(:created, unordered: true) do |topics|
+        topics.order('topics.created_at DESC')
+      end
+    end
+  end
 end
