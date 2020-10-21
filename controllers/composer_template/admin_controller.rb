@@ -17,7 +17,7 @@ class ComposerTemplate::AdminController < Admin::AdminController
       tembeds = TopicEmbed.where(topic_id: topic_ids)
       
       Topic.transaction do
-        operator = TopicsBulkAction.new(current_user, topic_ids, :delete)
+        operator = TopicsBulkAction.new(current_user, topic_ids, type: 'delete')
         operator.perform!
         tcfs.delete_all
         tembeds.delete_all
