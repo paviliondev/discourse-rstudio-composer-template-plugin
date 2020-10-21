@@ -13,6 +13,14 @@ Discourse.filters.push :articles
 Discourse.anonymous_filters.push :articles
 
 after_initialize do
+  %w[
+    ../lib/composer_template/engine.rb
+    ../controllers/composer_template/admin_controller.rb
+    ../config/routes.rb
+  ].each do |path|
+    load File.expand_path(path, __FILE__)
+  end
+  
   module ::ComposerTemplate
     def self.fields
       [
