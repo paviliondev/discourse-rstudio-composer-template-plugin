@@ -4,10 +4,6 @@ import Component from '@ember/component';
 import bootbox from "bootbox";
 
 export default Component.extend({
-  didInsertElement() {
-    console.log(this.category);
-  },
-  
   actions: {
     clearAll() {
       bootbox.confirm(
