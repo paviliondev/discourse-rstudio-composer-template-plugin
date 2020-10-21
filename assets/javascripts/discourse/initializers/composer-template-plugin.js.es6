@@ -67,24 +67,6 @@ function initWithApi(api) {
 
     return dec.h("li.rstudio-news-category-link", link);
   });
-
-  api.decorateWidget("post-contents:before", (dec) => {
-    const model = dec.getModel();
-
-    if (!model.firstPost) return;
-    if (!model.topic.get("category.rstudio_topic_previews_enabled")) return;
-
-    const onebox = model.topic.rstudio_article_url_onebox;
-    const oneboxUrl = model.get("topic.new_topic_form_data.url");
-
-    const footerHtmlLink = I18n.t("composer_template.footer_text", {
-      link: `<a href=${oneboxUrl}>${oneboxUrl}</a>`,
-    });
-    const footerHtml = `<small>${footerHtmlLink}</small><hr>`;
-    if (onebox) {
-      return dec.rawHtml(`<div>${onebox + footerHtml}</div>`);
-    }
-  });
 }
 
 export default {

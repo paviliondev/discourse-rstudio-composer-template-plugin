@@ -17,7 +17,7 @@
         {{raw "rstudio/tl-info"
           authors=context.topic.new_topic_form_data.authors
           username=context.topic.op_username
-          createdAt=context.topic.created_at
+          createdAt=context.topic.new_topic_form_data.posted_at
         }}
 
         {{raw "rstudio/tl-category-tags"

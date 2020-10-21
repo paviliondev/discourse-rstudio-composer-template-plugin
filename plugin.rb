@@ -9,8 +9,8 @@ enabled_site_setting :composer_template_enabled
   register_asset "stylesheets/rstudio-composer-template/#{type}.scss", type
 end
 
-Discourse.filters.push :created
-Discourse.anonymous_filters.push :created
+Discourse.filters.push :articles
+Discourse.anonymous_filters.push :articles
 
 after_initialize do
   module ::ComposerTemplate
@@ -31,6 +31,11 @@ after_initialize do
           'id' => 'url',
           'type' => 'text',
           'placeholder' => 'URL. If report, cite original article'
+        },
+        {
+          'id' => 'image_url',
+          'type' => 'text',
+          'placeholder' => 'Image URL. What will display in the topic list.'
         }
       ]
     end
@@ -49,9 +54,6 @@ after_initialize do
         topic_form.form['fields'] = fields
 
         topic_form.save
-
-        # c.sort_order = 'created'
-        # c.save!
       end
 
       create_form_for.call(category)
@@ -151,21 +153,16 @@ after_initialize do
     object.rstudio_topic_previews_enabled?
   }
 
-  add_to_serializer(:topic_view, :rstudio_article_url_onebox) {
-    article_url = new_topic_form_data&.dig('url')
-
-    if article_url
-      Oneboxer.preview(article_url)
-    end
-  }
-
   register_svg_icon 'external-link-alt'
-
-  require_dependency 'topic_query'
+  
   class ::TopicQuery
-    def list_created
-      create_list(:created, unordered: true) do |topics|
-        topics.order('topics.created_at DESC')
+    def list_articles
+      create_list(:articles, unordered: true) do |topics|
+        topics.joins("
+          INNER JOIN topic_custom_fields as tcf
+          ON tcf.topic_id = topics.id
+          AND tcf.name = 'new_topic_form_data'
+        ").order("tcf.value::json->>'posted_at' DESC")
       end
     end
   end
