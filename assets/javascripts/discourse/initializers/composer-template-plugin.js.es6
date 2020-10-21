@@ -67,6 +67,25 @@ function initWithApi(api) {
 
     return dec.h("li.rstudio-news-category-link", link);
   });
+  
+  const categoryRoutes = [
+    'category',
+    'parentCategory',
+    'categoryNone',
+    'categoryWithID'
+  ];
+  
+  categoryRoutes.forEach(function(route){
+    api.modifyClass(`route:discovery.${route}`, {
+      filter(category) {
+        if (category.id == this.siteSettings.composer_template_category) {
+          return "articles";
+        } else {
+          return this._super(category);
+        }
+      },
+    });
+  });
 }
 
 export default {
