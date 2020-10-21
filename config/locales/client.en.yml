@@ -6,3 +6,8 @@ en:
       clear_all:
         btn: "Clear All RSS"
         description: "Are you sure you want to clear all RSS topics in this category?"
+    
+    filters:
+      articles:
+        title: Latest Articles
+        help: "List articles in descending chronological order."
