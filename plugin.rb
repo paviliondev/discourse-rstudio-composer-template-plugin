@@ -163,15 +163,13 @@ after_initialize do
 
   register_svg_icon 'external-link-alt'
   
-  class ::TopicQuery
-    def list_articles
-      create_list(:articles, unordered: true) do |topics|
-        topics.joins("
-          INNER JOIN topic_custom_fields as tcf
-          ON tcf.topic_id = topics.id
-          AND tcf.name = 'new_topic_form_data'
-        ").order("tcf.value::json->>'posted_at' DESC")
-      end
+  add_to_class(:topic_query, :list_articles) do
+    create_list(:articles, unordered: true) do |topics|
+      topics.joins("
+        INNER JOIN topic_custom_fields as tcf
+        ON tcf.topic_id = topics.id
+        AND tcf.name = 'new_topic_form_data'
+      ").reorder("tcf.value::json->>'posted_at' DESC")
     end
   end
 end
