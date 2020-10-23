@@ -9,5 +9,5 @@ registerUnbound("rstudio-topic-url", (topic) => {
 registerUnbound("rstudio-topic-date", (date) => {
   if (!date) return;
 
-  return moment(date).format("YYYY-MM-DD HH:mm");
+  return moment(date).format("YYYY-MM-DD");
 });
