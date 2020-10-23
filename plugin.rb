@@ -27,8 +27,7 @@ after_initialize do
         {
           'id' => 'description',
           'type' => 'text',
-          'placeholder' => 'Description: Short summary of your article. Max 300 char.',
-          'regexp' => '^.{0,300}$'
+          'placeholder' => 'Description: Short summary of your article. Max 300 char.'
         },
         {
           'id' => 'authors',
