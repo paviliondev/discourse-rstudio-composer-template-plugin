@@ -44,6 +44,11 @@ after_initialize do
           'id' => 'image_url',
           'type' => 'text',
           'placeholder' => 'Image URL. What will display in the topic list.'
+        },
+        {
+          'id' => 'posted_at',
+          'type' => 'date',
+          'placeholder' => 'Date article was posted.'
         }
       ]
     end
@@ -170,6 +175,12 @@ after_initialize do
         ON tcf.topic_id = topics.id
         AND tcf.name = 'new_topic_form_data'
       ").reorder("tcf.value::json->>'posted_at' DESC")
+    end
+  end
+  
+  on(:new_topic_form_before_save) do |form_data|
+    if form_data['posted_at'] && (match = form_data['posted_at'].match(/date=(\S+)/i))
+      form_data['posted_at'] = match.captures.first
     end
   end
 end
