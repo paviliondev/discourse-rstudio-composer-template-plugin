@@ -13,14 +13,11 @@ class ComposerTemplate::AdminController < Admin::AdminController
     ", category_id)
     
     if (topic_ids = topics.map(&:id)).any?
-      tcfs = TopicCustomField.where(topic_id: topic_ids, name: ['new_topic_form_data', 'custom_embed'])
-      tembeds = TopicEmbed.where(topic_id: topic_ids)
-      
       Topic.transaction do
-        operator = TopicsBulkAction.new(current_user, topic_ids, type: 'delete')
-        operator.perform!
-        tcfs.delete_all
-        tembeds.delete_all
+        Post.where(topic_id: topic_ids).destroy_all
+        Topic.where(id: topic_ids).destroy_all
+        TopicCustomField.where(topic_id: topic_ids, name: ['new_topic_form_data', 'custom_embed']).destroy_all
+        TopicEmbed.where(topic_id: topic_ids).destroy_all
       end
     end
 
