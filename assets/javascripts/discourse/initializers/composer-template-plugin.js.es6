@@ -52,7 +52,7 @@ function initWithApi(api) {
   });
 
   api.decorateWidget("header-icons:before", (dec) => {
-    const catId = parseInt(dec.widget.siteSettings.composer_template_category);
+    const catId = parseInt(dec.widget.siteSettings.composer_template_category.split('|')[0]);
     const category = dec.widget.site.categories.findBy("id", catId);
 
     if (!category) return;
@@ -78,7 +78,7 @@ function initWithApi(api) {
   categoryRoutes.forEach(function(route){
     api.modifyClass(`route:discovery.${route}`, {
       filter(category) {
-        if (category.id == this.siteSettings.composer_template_category) {
+        if (this.siteSettings.composer_template_category.split('|').includes(category.id.toString())) {
           return "articles";
         } else {
           return this._super(category);

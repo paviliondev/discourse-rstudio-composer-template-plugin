@@ -55,23 +55,25 @@ after_initialize do
     def self.create_form
       PluginStoreRow.where(plugin_name: 'new_topic_form').delete_all
 
-      category = Category.find_by(id: SiteSetting.composer_template_category)
+      categories = Category.where(id: SiteSetting.composer_template_category.split('|')).to_a
 
-      return if category.blank?
+      return if categories.blank?
+      
+      categories.each do |category|
+        create_form_for = ->(c) do
+          topic_form = NewTopicForm::Form.new(c)
 
-      create_form_for = ->(c) do
-        topic_form = NewTopicForm::Form.new(c)
+          topic_form.form['enabled'] = true
+          topic_form.form['fields'] = fields
 
-        topic_form.form['enabled'] = true
-        topic_form.form['fields'] = fields
+          topic_form.save
+        end
 
-        topic_form.save
-      end
+        create_form_for.call(category)
 
-      create_form_for.call(category)
-
-      category.subcategories.each do |subcategory|
-        create_form_for.call(subcategory)
+        category.subcategories.each do |subcategory|
+          create_form_for.call(subcategory)
+        end
       end
     end
   end
