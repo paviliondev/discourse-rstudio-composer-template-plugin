@@ -1,4 +1,5 @@
 en:
   site_settings:
-    composer_template_enabled: "Enable composer template for articles?"
-    composer_template_category: "Article category"
+    composer_template_enabled: "Enable rstudio composer template"
+    composer_template_category: "Categories with rstudio composer template"
+    rstudio_jobs_category: "Rstudio jobs category"

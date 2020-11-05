@@ -1,5 +1,9 @@
 en:
   js:
+    rstudio_header_links:
+      news: "News"
+      jobs: "Jobs"
+    
     composer_template:
       submit_article: "Submit Article"
       footer_text: "This is a companion discussion topic for the original entry at %{link}"

@@ -142,13 +142,26 @@
   }
 }
 
-.rstudio-news-category-link {
+.d-header-icons {
+  display: flex;
+  align-items: center;
+  
+  .rstudio-links {
+    list-style: none;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.rstudio-news-category-link,
+.rstudio-jobs-category-link {
   list-style: none;
   padding: 6px 12px;
 
   a {
     color: $primary-high;
-    font-size: 1.4em;
+    font-size: 1.2em;
 
     &:visited {
       color: $primary-high;

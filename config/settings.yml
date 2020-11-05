@@ -6,3 +6,7 @@ plugins:
     default: ""
     type: "category_list"
     client: true
+  rstudio_jobs_category:
+    default: ""
+    type: "category"
+    client: true

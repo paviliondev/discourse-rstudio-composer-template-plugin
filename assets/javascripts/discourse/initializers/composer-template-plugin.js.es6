@@ -52,20 +52,26 @@ function initWithApi(api) {
   });
 
   api.decorateWidget("header-icons:before", (dec) => {
-    const catId = parseInt(dec.widget.siteSettings.composer_template_category.split('|')[0]);
-    const category = dec.widget.site.categories.findBy("id", catId);
+    const newsCatId = parseInt(dec.widget.siteSettings.composer_template_category.split('|')[0]);
+    const jobsCatId = parseInt(dec.widget.siteSettings.rstudio_jobs_category.split('|')[0]);
 
-    if (!category) return;
+    let result = [];
+    
+    if (jobsCatId > 0) {
+      const jobsCategory = dec.widget.site.categories.findBy("id", jobsCatId);
+      result.push(dec.h("li.rstudio-jobs-category-link", dec.h("a", {
+        href: getURL(`/c/${Category.slugFor(jobsCategory)}/${jobsCategory.get("id")}`)
+      }, I18n.t("rstudio_header_links.jobs"))));
+    }
 
-    const link = dec.h(
-      "a",
-      {
-        href: getURL(`/c/${Category.slugFor(category)}/${category.get("id")}`)
-      },
-      "News"
-    );
+    if (newsCatId > 0) {
+      const newsCategory = dec.widget.site.categories.findBy("id", newsCatId);
+      result.push(dec.h("li.rstudio-news-category-link", dec.h("a", {
+        href: getURL(`/c/${Category.slugFor(newsCategory)}/${newsCategory.get("id")}`)
+      }, I18n.t("rstudio_header_links.news"))));
+    }
 
-    return dec.h("li.rstudio-news-category-link", link);
+    return dec.h('ul.rstudio-links', result);
   });
   
   const categoryRoutes = [
