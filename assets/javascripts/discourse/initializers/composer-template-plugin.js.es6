@@ -6,7 +6,9 @@ import Category from "discourse/models/category";
 import I18n from "I18n";
 
 function initWithApi(api) {
-  if (!Discourse.SiteSettings.composer_template_enabled) return;
+  const siteSettings = api.container.lookup('site-settings:main');
+  
+  if (!siteSettings.rstudio_composer_template_enabled) return;
 
   api.modifyClass("controller:composer", {
     @discourseComputed(
@@ -52,7 +54,7 @@ function initWithApi(api) {
   });
 
   api.decorateWidget("header-icons:before", (dec) => {
-    const newsCatId = parseInt(dec.widget.siteSettings.composer_template_category.split('|')[0]);
+    const newsCatId = parseInt(dec.widget.siteSettings.rstudio_composer_template_category.split('|')[0]);
     const jobsCatId = parseInt(dec.widget.siteSettings.rstudio_jobs_category.split('|')[0]);
 
     let result = [];
@@ -84,7 +86,7 @@ function initWithApi(api) {
   categoryRoutes.forEach(function(route){
     api.modifyClass(`route:discovery.${route}`, {
       filter(category) {
-        if (this.siteSettings.composer_template_category.split('|').includes(category.id.toString())) {
+        if (this.siteSettings.rstudio_composer_template_category.split('|').includes(category.id.toString())) {
           return "articles";
         } else {
           return this._super(category);

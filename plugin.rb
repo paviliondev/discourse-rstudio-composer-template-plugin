@@ -3,7 +3,7 @@
 # author: Muhlis Cahyono (muhlisbc@gmail.com)
 # url: https://github.com/paviliondev/discourse-rstudio-composer-template-plugin
 
-enabled_site_setting :composer_template_enabled
+enabled_site_setting :rstudio_composer_template_enabled
 
 %i[common desktop mobile].each do |type|
   register_asset "stylesheets/rstudio-composer-template/#{type}.scss", type
@@ -55,7 +55,7 @@ after_initialize do
     def self.create_form
       PluginStoreRow.where(plugin_name: 'new_topic_form').delete_all
 
-      categories = Category.where(id: SiteSetting.composer_template_category.split('|')).to_a
+      categories = Category.where(id: SiteSetting.rstudio_composer_template_category.split('|')).to_a
 
       return if categories.blank?
       
@@ -84,7 +84,7 @@ after_initialize do
     def og_description
       smr = summary(strip_images: true)
 
-      return smr unless SiteSetting.composer_template_enabled
+      return smr unless SiteSetting.rstudio_composer_template_enabled
 
       category = @topic.category
 
@@ -99,7 +99,7 @@ after_initialize do
     end
 
     def article_url
-      return unless SiteSetting.composer_template_enabled
+      return unless SiteSetting.rstudio_composer_template_enabled
 
       category = @topic.category
 
@@ -126,7 +126,7 @@ after_initialize do
   end
 
   on(:site_setting_changed) do |site_setting|
-    if site_setting == :composer_template_category
+    if site_setting == :rstudio_composer_template_category
       ComposerTemplate.create_form
     end
   end
@@ -138,7 +138,7 @@ after_initialize do
   ComposerTemplate.create_form
 
   add_to_class(:category, :rstudio_topic_previews_enabled?) do
-    new_topic_form_enabled? && SiteSetting.composer_template_enabled
+    new_topic_form_enabled? && SiteSetting.rstudio_composer_template_enabled
   end
 
   TopicList.preloaded_custom_fields << 'new_topic_form_data'
