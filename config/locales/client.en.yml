@@ -6,7 +6,7 @@ en:
     
     composer_template:
       submit_article: "Submit Article"
-      footer_text: "This is a companion discussion topic for the original entry at %{link}"
+      footer_text: "This article was originally posted at %{link}"
       clear_all:
         btn: "Clear All RSS"
         description: "Are you sure you want to clear all RSS topics in this category?"
