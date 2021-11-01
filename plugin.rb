@@ -75,7 +75,7 @@ after_initialize do
     def self.create_news_form
       PluginStoreRow.where(plugin_name: 'new_topic_form').delete_all
 
-      categories = Category.where(id: SiteSetting.rstudio_composer_news_template_category.split('|')).to_a
+      categories = Category.where(id: SiteSetting.rstudio_composer_template_category.split('|')).to_a
 
       return if categories.blank?
       
@@ -171,7 +171,7 @@ after_initialize do
   end
 
   on(:site_setting_changed) do |site_setting|
-    if site_setting == :rstudio_composer_news_template_category
+    if site_setting == :rstudio_composer_template_category
       ComposerTemplate.create_news_form
     end
     if site_setting == :rstudio_composer_gallery_template_category

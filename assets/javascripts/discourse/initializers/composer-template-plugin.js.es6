@@ -57,9 +57,7 @@ function initWithApi(api) {
 
   api.decorateWidget("header-icons:before", (dec) => {
     const newsCatId = parseInt(
-      dec.widget.siteSettings.rstudio_composer_news_template_category.split(
-        "|"
-      )[0]
+      dec.widget.siteSettings.rstudio_composer_template_category.split("|")[0]
     );
     const jobsCatId = parseInt(
       dec.widget.siteSettings.rstudio_jobs_category.split("|")[0]
@@ -118,7 +116,7 @@ function initWithApi(api) {
       pluginId: "discourse-rstudio-composer-template-plugin",
       filter(category) {
         if (
-          this.siteSettings.rstudio_composer_news_template_category
+          this.siteSettings.rstudio_composer_template_category
             .split("|")
             .includes(category.id.toString())
         ) {
