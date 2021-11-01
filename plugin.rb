@@ -188,7 +188,8 @@ after_initialize do
   ComposerTemplate.create_gallery_form
 
   add_to_class(:category, :rstudio_topic_previews_enabled?) do
-    new_topic_form_enabled? && SiteSetting.rstudio_composer_template_enabled
+    SiteSetting.rstudio_composer_template_enabled &&
+      SiteSetting.rstudio_composer_topic_previews_category.split('|').any? { |category_id| category_id == self.id }
   end
 
   TopicList.preloaded_custom_fields << 'new_topic_form_data'
