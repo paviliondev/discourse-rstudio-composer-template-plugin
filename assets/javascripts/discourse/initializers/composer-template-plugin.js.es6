@@ -6,11 +6,12 @@ import Category from "discourse/models/category";
 import I18n from "I18n";
 
 function initWithApi(api) {
-  const siteSettings = api.container.lookup('site-settings:main');
-  
+  const siteSettings = api.container.lookup("site-settings:main");
+
   if (!siteSettings.rstudio_composer_template_enabled) return;
 
   api.modifyClass("controller:composer", {
+    pluginId: "discourse-rstudio-composer-template-plugin",
     @discourseComputed(
       "model.action",
       "isWhispering",
@@ -50,43 +51,77 @@ function initWithApi(api) {
   });
 
   api.modifyClass("component:topic-list-item", {
-    categoryCtrl: inject("navigation/category")
+    pluginId: "discourse-rstudio-composer-template-plugin",
+    categoryCtrl: inject("navigation/category"),
   });
 
   api.decorateWidget("header-icons:before", (dec) => {
-    const newsCatId = parseInt(dec.widget.siteSettings.rstudio_composer_template_category.split('|')[0]);
-    const jobsCatId = parseInt(dec.widget.siteSettings.rstudio_jobs_category.split('|')[0]);
+    const newsCatId = parseInt(
+      dec.widget.siteSettings.rstudio_composer_news_template_category.split(
+        "|"
+      )[0]
+    );
+    const jobsCatId = parseInt(
+      dec.widget.siteSettings.rstudio_jobs_category.split("|")[0]
+    );
 
     let result = [];
-    
+
     if (jobsCatId > 0) {
       const jobsCategory = dec.widget.site.categories.findBy("id", jobsCatId);
-      result.push(dec.h("li.rstudio-jobs-category-link", dec.h("a", {
-        href: getURL(`/c/${Category.slugFor(jobsCategory)}/${jobsCategory.get("id")}`)
-      }, I18n.t("rstudio_header_links.jobs"))));
+      result.push(
+        dec.h(
+          "li.rstudio-jobs-category-link",
+          dec.h(
+            "a",
+            {
+              href: getURL(
+                `/c/${Category.slugFor(jobsCategory)}/${jobsCategory.get("id")}`
+              ),
+            },
+            I18n.t("rstudio_header_links.jobs")
+          )
+        )
+      );
     }
 
     if (newsCatId > 0) {
       const newsCategory = dec.widget.site.categories.findBy("id", newsCatId);
-      result.push(dec.h("li.rstudio-news-category-link", dec.h("a", {
-        href: getURL(`/c/${Category.slugFor(newsCategory)}/${newsCategory.get("id")}`)
-      }, I18n.t("rstudio_header_links.news"))));
+      result.push(
+        dec.h(
+          "li.rstudio-news-category-link",
+          dec.h(
+            "a",
+            {
+              href: getURL(
+                `/c/${Category.slugFor(newsCategory)}/${newsCategory.get("id")}`
+              ),
+            },
+            I18n.t("rstudio_header_links.news")
+          )
+        )
+      );
     }
 
-    return dec.h('ul.rstudio-links', result);
+    return dec.h("ul.rstudio-links", result);
   });
-  
+
   const categoryRoutes = [
-    'category',
-    'parentCategory',
-    'categoryNone',
-    'categoryWithID'
+    "category",
+    "parentCategory",
+    "categoryNone",
+    "categoryWithID",
   ];
-  
-  categoryRoutes.forEach(function(route){
+
+  categoryRoutes.forEach(function (route) {
     api.modifyClass(`route:discovery.${route}`, {
+      pluginId: "discourse-rstudio-composer-template-plugin",
       filter(category) {
-        if (this.siteSettings.rstudio_composer_template_category.split('|').includes(category.id.toString())) {
+        if (
+          this.siteSettings.rstudio_composer_news_template_category
+            .split("|")
+            .includes(category.id.toString())
+        ) {
           return "articles";
         } else {
           return this._super(category);

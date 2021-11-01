@@ -2,7 +2,11 @@ plugins:
   rstudio_composer_template_enabled:
     default: true
     client: true
-  rstudio_composer_template_category:
+  rstudio_composer_news_template_category:
+    default: ""
+    type: "category_list"
+    client: true
+  rstudio_composer_gallery_template_category:
     default: ""
     type: "category_list"
     client: true
