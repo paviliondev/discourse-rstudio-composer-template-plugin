@@ -66,12 +66,9 @@ function initWithApi(api) {
       }, I18n.t("rstudio_header_links.jobs"))));
     }
 
-    if (newsCatId > 0) {
-      const newsCategory = dec.widget.site.categories.findBy("id", newsCatId);
-      result.push(dec.h("li.rstudio-news-category-link", dec.h("a", {
-        href: getURL(`/c/${Category.slugFor(newsCategory)}/${newsCategory.get("id")}`)
-      }, I18n.t("rstudio_header_links.news"))));
-    }
+    result.push(dec.h("li.rstudio-news-link", dec.h("a", {
+      href: siteSettings.rstudio_news_link
+    }, I18n.t("rstudio_header_links.news"))));
 
     return dec.h('ul.rstudio-links', result);
   });
