@@ -18,3 +18,6 @@ plugins:
     default: ""
     type: "category"
     client: true
+  rstudio_news_link:
+    default: "/c/news"
+    client: true
