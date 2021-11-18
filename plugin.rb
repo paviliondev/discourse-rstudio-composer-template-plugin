@@ -64,11 +64,6 @@ after_initialize do
           'type' => 'text',
           'placeholder' => 'Authors (Affiliations), e.g. Jon Snow (Royal College of Physicians)'
         },
-        {
-          'id' => 'image_url',
-          'type' => 'text',
-          'placeholder' => 'Image URL. What will display in the topic list.'
-        },
       ]
     end
 
