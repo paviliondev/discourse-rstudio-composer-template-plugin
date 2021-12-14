@@ -1,6 +1,8 @@
 en:
   site_settings:
     rstudio_composer_template_enabled: "Enable rstudio composer template"
-    rstudio_composer_template_category: "Categories with rstudio composer template"
+    rstudio_composer_template_category: "Categories with rstudio composer news template"
+    rstudio_composer_gallery_template_category: "Categories with rstudio composer table gallery template"
+    rstudio_composer_topic_previews_category: "Categories with rstudio composer topic preview"
     rstudio_jobs_category: "Rstudio jobs category"
     rstudio_news_link: "Rstudio 'News' link"

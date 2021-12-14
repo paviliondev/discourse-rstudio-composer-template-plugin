@@ -22,7 +22,7 @@ after_initialize do
   end
   
   module ::ComposerTemplate
-    def self.fields
+    def self.news_fields
       [
         {
           'id' => 'description',
@@ -52,7 +52,22 @@ after_initialize do
       ]
     end
 
-    def self.create_form
+    def self.gallery_fields
+      [
+        {
+          'id' => 'description',
+          'type' => 'text',
+          'placeholder' => 'Description: Short summary of your table. Max 500 char.'
+        },
+        {
+          'id' => 'authors',
+          'type' => 'text',
+          'placeholder' => 'Authors (Affiliations), e.g. Jon Snow (Royal College of Physicians)'
+        },
+      ]
+    end
+
+    def self.create_news_form
       PluginStoreRow.where(plugin_name: 'new_topic_form').delete_all
 
       categories = Category.where(id: SiteSetting.rstudio_composer_template_category.split('|')).to_a
@@ -64,7 +79,32 @@ after_initialize do
           topic_form = NewTopicForm::Form.new(c)
 
           topic_form.form['enabled'] = true
-          topic_form.form['fields'] = fields
+          topic_form.form['fields'] = news_fields
+
+          topic_form.save
+        end
+
+        create_form_for.call(category)
+
+        category.subcategories.each do |subcategory|
+          create_form_for.call(subcategory)
+        end
+      end
+    end
+
+    def self.create_gallery_form
+      PluginStoreRow.where(plugin_name: 'new_topic_form').delete_all
+
+      categories = Category.where(id: SiteSetting.rstudio_composer_gallery_template_category.split('|')).to_a
+
+      return if categories.blank?
+      
+      categories.each do |category|
+        create_form_for = ->(c) do
+          topic_form = NewTopicForm::Form.new(c)
+
+          topic_form.form['enabled'] = true
+          topic_form.form['fields'] = gallery_fields
 
           topic_form.save
         end
@@ -127,18 +167,24 @@ after_initialize do
 
   on(:site_setting_changed) do |site_setting|
     if site_setting == :rstudio_composer_template_category
-      ComposerTemplate.create_form
+      ComposerTemplate.create_news_form
+    end
+    if site_setting == :rstudio_composer_gallery_template_category
+      ComposerTemplate.create_gallery_form
     end
   end
 
   on(:category_created) do |_category|
-    ComposerTemplate.create_form
+    ComposerTemplate.create_news_form
+    ComposerTemplate.create_gallery_form
   end
 
-  ComposerTemplate.create_form
+  ComposerTemplate.create_news_form
+  ComposerTemplate.create_gallery_form
 
   add_to_class(:category, :rstudio_topic_previews_enabled?) do
-    new_topic_form_enabled? && SiteSetting.rstudio_composer_template_enabled
+    SiteSetting.rstudio_composer_template_enabled &&
+      SiteSetting.rstudio_composer_topic_previews_category.split('|').any? { |category_id| category_id == self.id }
   end
 
   TopicList.preloaded_custom_fields << 'new_topic_form_data'

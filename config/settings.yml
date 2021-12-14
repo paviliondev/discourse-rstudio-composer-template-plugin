@@ -6,6 +6,14 @@ plugins:
     default: ""
     type: "category_list"
     client: true
+  rstudio_composer_gallery_template_category:
+    default: ""
+    type: "category_list"
+    client: true
+  rstudio_composer_topic_previews_category:
+    default: ""
+    type: "category_list"
+    client: true
   rstudio_jobs_category:
     default: ""
     type: "category"

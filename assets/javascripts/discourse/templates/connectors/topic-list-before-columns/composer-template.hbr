@@ -1,4 +1,5 @@
 {{#if context.categoryCtrl.category.rstudio_topic_previews_enabled}}
+{{{context.categoryCtrl.category}}}
   <div class="rstudio-tl-item">
     <div class="rstudio-tl-left main-link">
       {{topic-link context.topic class="rstudio-tl-title raw-link raw-topic-link"}}
